@@ -1,7 +1,12 @@
 {% extends 'myapp/base.html' %}
 
 {% block body %}
-    {{book.name}} <br>
-    {{book.desc}} <br>
-    {{book.price}} <br>
+    <img width="250" height="300" src="{{book.book_image.url}}">
+
+    <h2>{{book.name}}</h2>
+    
+    <h4>{{book.desc}}</h4>
+    
+    <h6>{{book.price}}</h6>
+    
 {% endblock %}
