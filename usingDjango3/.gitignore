@@ -1,4 +1,4 @@
 __pycache__
-db.sqlite3
+todo_dir\todo_app\db.sqlite3
 settings.py
 .vscode

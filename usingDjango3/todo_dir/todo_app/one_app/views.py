@@ -9,9 +9,17 @@ def index(request):
     if request.method == 'POST':
         name = request.POST.get('name', '')
         priority = request.POST.get('priority', '')
-
-        task = Task(name=name, priority=priority)
+        date = request.POST.get('date', '')
+        task = Task(name=name, priority=priority, date=date)
         task.save()
         return redirect('/')
 
     return render(request, 'one_app/index.html', {'task_list': task_list})
+
+
+def delete(request,taskid):
+    task = Task.objects.get(id=taskid)
+    if request.method=='POST':
+        task.delete()
+        return redirect('/')
+    return render(request,'one_app/delete.html',{'task': task})
