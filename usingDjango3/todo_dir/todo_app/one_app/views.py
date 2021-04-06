@@ -1,8 +1,21 @@
 from django.shortcuts import redirect, render
 from .models import Task
 from .forms import TodoForm
+from django.views.generic import ListView,DetailView
+from django.views.generic.detail import DetailView
 
 # Create your views here.
+
+class TaskListView(ListView):
+    model = Task
+    template_name = 'one_app/index.html'
+    context_object_name = 'task_list'
+
+class TaskDetailView(DetailView):
+    model = Task
+    template_name = 'one_app/detail.html'
+    context_object_name = 'task'
+
 
 def index(request):
     task_list = Task.objects.all()
