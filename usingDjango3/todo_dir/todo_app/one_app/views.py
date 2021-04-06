@@ -3,7 +3,8 @@ from .models import Task
 from .forms import TodoForm
 from django.views.generic import ListView,DetailView
 from django.views.generic.detail import DetailView
-
+from django.views.generic.edit import UpdateView,DeleteView
+from django.urls import reverse_lazy
 # Create your views here.
 
 class TaskListView(ListView):
@@ -15,6 +16,20 @@ class TaskDetailView(DetailView):
     model = Task
     template_name = 'one_app/detail.html'
     context_object_name = 'task'
+
+class TaskUpdateView(UpdateView):
+    model = Task
+    template_name = 'one_app/update.html'
+    context_object_name = 'task'
+    fields = ('name','priority','date')
+
+    def get_success_url(self):
+        return reverse_lazy('cbvdetail',kwargs={'pk':self.object.id})
+
+class TaskDeleteView(DeleteView):
+    model = Task
+    template_name = 'one_app/delete.html'
+    success_url = reverse_lazy('cbvindex')
 
 
 def index(request):
